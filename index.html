@@ -27,7 +27,6 @@
   --border: #E5E7EB;
   --grad: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
   --grad2: linear-gradient(135deg, #B91C1C 0%, #7F1D1D 100%);
-  --grad-light: linear-gradient(135deg, #FEE2E2 0%, #FEF2F2 100%);
   --shadow: 0 4px 20px rgba(220, 38, 38, 0.15);
   --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.08);
   --radius: 20px;
@@ -70,7 +69,7 @@ html, body {
   background-position: center;
   align-items: flex-end;
   justify-content: center;
-  padding-bottom: 80px;
+  padding-bottom: 100px;
   position: relative;
 }
 
@@ -89,13 +88,6 @@ html, body {
     opacity: 1;
     transform: scale(1);
   }
-}
-
-.splash-logo-wrap img {
-  width: 120px;
-  height: auto;
-  margin-bottom: 30px;
-  filter: drop-shadow(0 4px 20px rgba(0,0,0,0.2));
 }
 
 .splash-loader {
@@ -1723,44 +1715,42 @@ table.laporan-tabel tr:last-child td {
 </head>
 <body>
 
-<!-- SPLASH SCREEN -->
+<!-- SPLASH SCREEN - TANPA ICON, HANYA BACKGROUND LOOPSCREEN -->
 <div class="screen active" id="splash">
   <div class="splash-logo-wrap">
-  <img src="https://github.com/dany29326-prog/rumahsedekahalfurqon/blob/main/icon.webp?raw=true" alt="Rumah Sedekah Al Furqon">
-  <p style="color:white; margin-top:16px; font-size:12px; letter-spacing:2px;">Amanah • Transparan • Tepat Sasaran</p>
-  <div class="splash-loader">
-    <div class="splash-loader-bar"></div>
+    <div class="splash-loader">
+      <div class="splash-loader-bar"></div>
+    </div>
   </div>
-</div>
 </div>
 
 <!-- LOGIN SCREEN -->
 <div class="screen" id="login">
   <div class="login-header">
-  <h2>Selamat Datang 👋</h2>
-  <p>Masuk untuk mulai mencatat donasi</p>
-  <p style="font-size:12px; color:rgba(255,255,255,0.8); margin-top:8px; letter-spacing:1px;">Amanah • Transparan • Tepat Sasaran</p>
-</div>
-<div class="login-body">
-  <div class="login-card">
-    <h3>Login Petugas</h3>
-    <div class="form-group">
-      <label>Nama Petugas</label>
-      <input type="text" id="login-nama" placeholder="Masukkan nama lengkap">
-    </div>
-    <div class="form-group" style="position:relative;">
-      <label>PIN Petugas (4-6 Digit)</label>
-      <input type="password" id="login-pass" placeholder="Masukkan kode akses" maxlength="6" style="padding-right:40px;">
-      <span id="toggle-mata" onclick="togglePassword()" style="position:absolute;right:16px;top:38px;cursor:pointer;font-size:18px;">👁️</span>
-    </div>
-    <div class="form-group" style="display:flex;align-items:center;gap:8px;margin-top:-8px;margin-bottom:16px;">
-      <input type="checkbox" id="login-remember" style="width:16px;height:16px;accent-color:var(--merah);cursor:pointer;">
-      <label for="login-remember" style="margin-bottom:0;cursor:pointer;font-size:13px;color:var(--teks-muda);font-weight:600;">Ingat Nama Saya</label>
-    </div>
-    <button class="btn-primary" onclick="doLogin()">Masuk →</button>
-    <p class="login-note">Hubungi admin jika lupa PIN</p>
+    <h2>Selamat Datang 👋</h2>
+    <p>Masuk untuk mulai mencatat donasi</p>
+    <p style="font-size:12px; color:rgba(255,255,255,0.8); margin-top:8px; letter-spacing:1px;">Amanah • Transparan • Tepat Sasaran</p>
   </div>
-</div>
+  <div class="login-body">
+    <div class="login-card">
+      <h3>Login Petugas</h3>
+      <div class="form-group">
+        <label>Nama Petugas</label>
+        <input type="text" id="login-nama" placeholder="Masukkan nama lengkap">
+      </div>
+      <div class="form-group" style="position:relative;">
+        <label>PIN Petugas (4-6 Digit)</label>
+        <input type="password" id="login-pass" placeholder="Masukkan kode akses" maxlength="6" style="padding-right:40px;">
+        <span id="toggle-mata" onclick="togglePassword()" style="position:absolute;right:16px;top:38px;cursor:pointer;font-size:18px;">👁️</span>
+      </div>
+      <div class="form-group" style="display:flex;align-items:center;gap:8px;margin-top:-8px;margin-bottom:16px;">
+        <input type="checkbox" id="login-remember" style="width:16px;height:16px;accent-color:var(--merah);cursor:pointer;">
+        <label for="login-remember" style="margin-bottom:0;cursor:pointer;font-size:13px;color:var(--teks-muda);font-weight:600;">Ingat Nama Saya</label>
+      </div>
+      <button class="btn-primary" onclick="doLogin()">Masuk →</button>
+      <p class="login-note">Hubungi admin jika lupa PIN</p>
+    </div>
+  </div>
 </div>
 
 <!-- DASHBOARD SCREEN -->
@@ -1780,6 +1770,7 @@ table.laporan-tabel tr:last-child td {
       <h2 id="dash-name">Petugas</h2>
       <small id="dash-id">ID: -</small>
       <small class="dash-area" id="dash-area" style="display:none;">📍 -</small>
+      <small style="display:block; font-size:10px; color:#FEE2E2; margin-top:4px;">Amanah • Transparan • Tepat Sasaran</small>
     </div>
     <div class="dash-nav">
       <div class="dash-nav-item active">Dashboard</div>
@@ -1933,7 +1924,7 @@ table.laporan-tabel tr:last-child td {
 //  RUMAH SEDEKAH AL FURQON - Frontend Script
 //  Ganti GAS_URL ini dengan URL Web App hasil deploy
 // ============================================================
-const GAS_URL = 'https://script.google.com/macros/s/AKfycbwVu0fXcqky28aP5NSRrLnbpC93B2Y1oCmo1h5JoYjm30TJ931T89kr0-qph92UFU7QaA/exec';
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbxJeseWU1jdqNpNi7s8pWMu-NPgn7BTDUJzNw_pkTVmoW8M3OMdn1EGykBcoXxcpLwz/exec';
 
 let currentPetugas = null;
 let donaturType = 'umum';
@@ -2485,7 +2476,10 @@ function kirimKwitansiWA() {
   const baris = '━━━━━━━━━━━━━━━━━━━━━━━━';
   const pesan = `╔══════════════════════╗\n   🕌 *RUMAH SEDEKAH AL FURQON*\n     📋 *BUKTI DONASI RESMI*\n╚══════════════════════╝\n\n${baris}\n🔖 *No. Kwitansi*\n    ${d.trxId}\n\n📅 *Tanggal* : ${d.tanggal}\n⏰ *Waktu*   : ${d.waktu} WIB\n${baris}\n\n👤 *Nama Donatur*\n    ${d.donatur_nama}\n\n💚 *Jenis Donasi* : *${d.jenis.toUpperCase()}*\n💰 *Nominal*      : *${nominalFmt}*\n💳 *Metode Bayar* : ${d.metode_bayar || 'Cash'}\n${d.catatan ? `📝 *Catatan* : ${d.catatan}\n` : ''}\n${baris}\n🧑 *Petugas* : ${d.petugas_nama}\n🪪 *ID*      : ${d.petugas_id}\n${baris}\n\n✅ *Donasi Anda telah diterima*\n🤲 _Jazakallahu khairan katsiran_\n_Semoga menjadi amal jariyah._\n_Aamiin_ 🙏\n\n${baris}\n_Rumah Sedekah Al Furqon_\n_Amanah, Transparan, Tepat Sasaran_`;
   window.open(`https://wa.me/${nomor}?text=${encodeURIComponent(pesan)}`, '_blank');
-  // ... rest of code
+  const btn = document.getElementById('btn-kirim-wa');
+  btn.innerHTML = '✅ Kwitansi Terkirim!';
+  btn.disabled = true;
+  btn.style.background = '#10B981';
 }
 
 function closeSuccess() {
@@ -2664,7 +2658,7 @@ function formatDateFromInput(inputVal) {
 
 async function tampilkanLaporan() {
   const tbody = document.getElementById('laporan-tbody');
-  tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:20px;">⏳ Memuat data...</td></tr>';
+  tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:20px;">⏳ Memuat data......</td></tr>';
   const tglMulai = formatDateFromInput(document.getElementById('laporan-tgl-mulai').value);
   const tglSelesai = formatDateFromInput(document.getElementById('laporan-tgl-selesai').value);
   try {
@@ -2713,7 +2707,7 @@ function shareLaporanWA() {
   const transaksi = document.getElementById('lr-transaksi').textContent;
   const mulai = document.getElementById('laporan-tgl-mulai').value;
   const selesai = document.getElementById('laporan-tgl-selesai').value;
-  const pesan = `📊 *LAPORAN DONASI RUMAH SEDEKAH AL FURQON*\n\n📅 Periode: ${mulai} s/d ${selesai}\n👤 Petugas: ${currentPetugas.nama}\n🆔 ID: ${currentPetugas.id}\n\n💰 Total: *${total}*\n📋 Transaksi: *${transaksi}*\n\n✅ _Menebar Berkah, Meraih Ridha_`;
+  const pesan = `📊 *LAPORAN DONASI RUMAH SEDEKAH AL FURQON*\n\n📅 Periode: ${mulai} s/d ${selesai}\n👤 Petugas: ${currentPetugas.nama}\n🆔 ID: ${currentPetugas.id}\n\n💰 Total: *${total}*\n📋 Transaksi: *${transaksi}*\n\n✅ _Amanah, Transparan, Tepat Sasaran_`;
   window.open(`https://wa.me/?text=${encodeURIComponent(pesan)}`, '_blank');
 }
 

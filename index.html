@@ -1,0 +1,2815 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+<title>Rumah Sedekah Al Furqon</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+  --merah: #DC2626;
+  --merah-gelap: #B91C1C;
+  --merah-tua: #7F1D1D;
+  --merah-muda: #FEE2E2;
+  --putih: #FFFFFF;
+  --abu: #F3F4F6;
+  --abu-gelap: #9CA3AF;
+  --teks: #1F2937;
+  --teks-muda: #6B7280;
+  --border: #E5E7EB;
+  --grad: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
+  --grad2: linear-gradient(135deg, #B91C1C 0%, #7F1D1D 100%);
+  --grad-light: linear-gradient(135deg, #FEE2E2 0%, #FEF2F2 100%);
+  --shadow: 0 4px 20px rgba(220, 38, 38, 0.15);
+  --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.08);
+  --radius: 20px;
+  --radius-sm: 12px;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: #FEF2F2;
+  color: var(--teks);
+}
+
+.screen {
+  display: none;
+  flex-direction: column;
+  min-height: 100vh;
+  animation: fadeIn 0.35s ease;
+}
+
+.screen.active {
+  display: flex;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========== SPLASH SCREEN ========== */
+#splash {
+  background-image: url('https://github.com/dany29326-prog/rumahsedekahalfurqon/blob/main/loopscreen.webp?raw=true');
+  background-size: cover;
+  background-position: center;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 80px;
+  position: relative;
+}
+
+.splash-logo-wrap {
+  text-align: center;
+  z-index: 2;
+  animation: splashIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes splashIn {
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.splash-logo-wrap img {
+  width: 120px;
+  height: auto;
+  margin-bottom: 30px;
+  filter: drop-shadow(0 4px 20px rgba(0,0,0,0.2));
+}
+
+.splash-loader {
+  margin-top: 48px;
+  width: 200px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 99px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.splash-loader-bar {
+  height: 100%;
+  border-radius: 99px;
+  background: var(--grad);
+  animation: loadBar 1.8s ease forwards;
+}
+
+@keyframes loadBar {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* ========== LOGIN ========== */
+#login {
+  background: var(--abu);
+}
+
+.login-header {
+  background: var(--grad);
+  padding: 48px 24px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.login-header::after {
+  content: '';
+  position: absolute;
+  bottom: -40px;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: var(--abu);
+  border-radius: 40px 40px 0 0;
+}
+
+.login-header h2 {
+  color: white;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.login-header p {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+.login-body {
+  padding: 0 24px 32px;
+  margin-top: -12px;
+  flex: 1;
+}
+
+.login-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+}
+
+.login-card h3 {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--teks);
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--teks-muda);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 13px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 15px;
+  color: var(--teks);
+  background: var(--abu);
+  outline: none;
+  transition: all 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: var(--merah);
+  background: white;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 15px;
+  background: var(--grad);
+  border: none;
+  border-radius: var(--radius-sm);
+  color: white;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: all 0.2s;
+  box-shadow: 0 4px 14px rgba(220, 38, 38, 0.4);
+}
+
+.btn-primary:active {
+  opacity: 0.9;
+  transform: scale(0.98);
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.login-note {
+  text-align: center;
+  font-size: 12px;
+  color: var(--teks-muda);
+  margin-top: 16px;
+}
+
+/* ========== DASHBOARD ========== */
+#dashboard {
+  background: var(--abu);
+}
+
+.dash-header {
+  background: white;
+  padding: 16px 20px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.dash-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.dash-ac {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.dash-ac img {
+  height: 32px;
+  width: auto;
+}
+
+.dash-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dash-bell {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--abu);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.dash-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--grad);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
+  overflow: hidden;
+}
+
+.dash-avatar-foto {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.dash-greet {
+  padding: 0 0 14px;
+}
+
+.dash-greet p {
+  font-size: 13px;
+  color: var(--teks-muda);
+}
+
+.dash-greet h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--teks);
+}
+
+.dash-greet small {
+  font-size: 11px;
+  color: var(--merah);
+  font-weight: 600;
+  background: #FEF2F2;
+  padding: 2px 8px;
+  border-radius: 99px;
+}
+
+.dash-area {
+  font-size: 10px;
+  color: var(--merah);
+  font-weight: 600;
+  background: #FEF2F2;
+  padding: 2px 8px;
+  border-radius: 99px;
+  margin-left: 4px;
+}
+
+.dash-nav {
+  display: flex;
+  border-top: 1px solid var(--border);
+}
+
+.dash-nav-item {
+  flex: 1;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--teks-muda);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+}
+
+.dash-nav-item.active {
+  color: var(--merah);
+  border-bottom-color: var(--merah);
+}
+
+.dash-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 16px 90px;
+}
+
+.hero-card {
+  background: var(--grad);
+  border-radius: var(--radius);
+  padding: 20px;
+  color: white;
+  margin-bottom: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-card::before {
+  content: '';
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 140px;
+  height: 140px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+}
+
+.hero-card::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  right: 20px;
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+}
+
+.hero-label {
+  font-size: 11px;
+  opacity: 0.9;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.hero-amount {
+  font-size: 28px;
+  font-weight: 800;
+  margin: 4px 0;
+  font-family: 'Nunito', sans-serif;
+}
+
+.hero-target {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.hero-bar-wrap {
+  margin: 12px 0 6px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 99px;
+  height: 8px;
+}
+
+.hero-bar {
+  height: 100%;
+  border-radius: 99px;
+  background: white;
+  transition: width 0.8s ease;
+}
+
+.hero-pct {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: white;
+  border-radius: 12px;
+  padding: 8px 12px;
+  text-align: center;
+  z-index: 2;
+}
+
+.hero-pct-num {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--merah);
+  line-height: 1;
+}
+
+.hero-pct-label {
+  font-size: 10px;
+  color: var(--teks-muda);
+}
+
+.quick-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.quick-btn {
+  flex: 1;
+  background: white;
+  border-radius: var(--radius-sm);
+  padding: 14px 8px;
+  text-align: center;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.quick-btn:active {
+  transform: scale(0.96);
+}
+
+.quick-btn .q-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  margin: 0 auto 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.q-merah {
+  background: #FEF2F2;
+}
+
+.q-hijau {
+  background: #ECFDF5;
+}
+
+.q-kuning {
+  background: #FFFBEB;
+}
+
+.quick-btn span {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--teks);
+}
+
+.stats-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.stat-card {
+  flex: 1;
+  background: white;
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border);
+}
+
+.stat-card .s-icon {
+  font-size: 20px;
+  margin-bottom: 6px;
+}
+
+.stat-card .s-val {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--teks);
+  font-family: 'Nunito', sans-serif;
+}
+
+.stat-card .s-label {
+  font-size: 11px;
+  color: var(--teks-muda);
+  margin-top: 2px;
+}
+
+.stat-card .s-trend {
+  font-size: 11px;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.s-up {
+  color: #10B981;
+}
+
+.s-down {
+  color: var(--merah);
+}
+
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.section-head h3 {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.section-head a {
+  font-size: 12px;
+  color: var(--merah);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.donasi-item {
+  background: white;
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  margin-bottom: 10px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.di-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--grad);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+
+.di-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.di-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--teks);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.di-meta {
+  font-size: 11px;
+  color: var(--teks-muda);
+  margin-top: 2px;
+}
+
+.di-right {
+  text-align: right;
+}
+
+.di-amount {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--merah);
+  font-family: 'Nunito', sans-serif;
+}
+
+.di-type {
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 99px;
+  font-weight: 600;
+  display: inline-block;
+  margin-top: 3px;
+}
+
+.type-infak {
+  background: #FEF2F2;
+  color: #DC2626;
+}
+
+.type-zakat {
+  background: #FFFBEB;
+  color: #F59E0B;
+}
+
+.type-wakaf {
+  background: #ECFDF5;
+  color: #10B981;
+}
+
+/* ========== FORM DONASI ========== */
+#form-donasi {
+  background: var(--abu);
+}
+
+.form-header {
+  background: var(--grad);
+  padding: 20px 20px 32px;
+  position: relative;
+}
+
+.form-header::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: var(--abu);
+  border-radius: 24px 24px 0 0;
+}
+
+.form-back {
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-bottom: 12px;
+  font-size: 18px;
+  color: white;
+}
+
+.form-header h2 {
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.form-header p {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 13px;
+  margin-top: 2px;
+}
+
+.form-body {
+  padding: 16px 16px 80px;
+}
+
+.form-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border);
+  margin-bottom: 14px;
+}
+
+.form-card h4 {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--teks-muda);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 14px;
+}
+
+.donatur-type-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.dtype-btn {
+  flex: 1;
+  padding: 10px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border);
+  background: var(--abu);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--teks-muda);
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.dtype-btn.active {
+  border-color: var(--merah);
+  background: #FEF2F2;
+  color: var(--merah);
+}
+
+.jenis-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 0;
+}
+
+.jenis-btn {
+  padding: 12px 8px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border);
+  background: var(--abu);
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.jenis-btn .j-icon {
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+.jenis-btn .j-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--teks-muda);
+}
+
+.jenis-btn.active.infak {
+  border-color: #DC2626;
+  background: #FEF2F2;
+}
+
+.jenis-btn.active.infak .j-label {
+  color: #DC2626;
+}
+
+.jenis-btn.active.zakat {
+  border-color: #F59E0B;
+  background: #FFFBEB;
+}
+
+.jenis-btn.active.zakat .j-label {
+  color: #F59E0B;
+}
+
+.jenis-btn.active.wakaf {
+  border-color: #10B981;
+  background: #ECFDF5;
+}
+
+.jenis-btn.active.wakaf .j-label {
+  color: #10B981;
+}
+
+.nominal-quick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.nom-q {
+  padding: 8px 14px;
+  background: var(--abu);
+  border: 1.5px solid var(--border);
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--teks-muda);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.nom-q.active {
+  border-color: var(--merah);
+  background: #FEF2F2;
+  color: var(--merah);
+}
+
+.input-prefix-wrap {
+  position: relative;
+}
+
+.input-prefix {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--teks-muda);
+}
+
+.input-prefix-wrap input {
+  padding-left: 44px;
+}
+
+.btn-submit {
+  width: 100%;
+  padding: 16px;
+  background: var(--grad);
+  border: none;
+  border-radius: var(--radius-sm);
+  color: white;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(220, 38, 38, 0.4);
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-submit:active {
+  opacity: 0.9;
+  transform: scale(0.98);
+}
+
+.btn-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ========== MODAL SUCCESS ========== */
+#success-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+#success-modal.show {
+  display: flex;
+  animation: fadeIn 0.3s ease;
+}
+
+.success-card {
+  background: white;
+  border-radius: 24px;
+  padding: 32px 24px;
+  text-align: center;
+  width: 100%;
+  max-width: 340px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+.success-icon {
+  font-size: 56px;
+  margin-bottom: 12px;
+  animation: bounceIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes bounceIn {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.success-card h3 {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--teks);
+  margin-bottom: 6px;
+}
+
+.success-card p {
+  font-size: 13px;
+  color: var(--teks-muda);
+  line-height: 1.5;
+}
+
+.success-detail {
+  background: var(--abu);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  margin: 16px 0;
+  text-align: left;
+}
+
+.sd-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  font-size: 12px;
+}
+
+.sd-row:last-child {
+  margin-bottom: 0;
+}
+
+.sd-label {
+  color: var(--teks-muda);
+}
+
+.sd-val {
+  font-weight: 700;
+  color: var(--teks);
+}
+
+.btn-kirim-wa {
+  width: 100%;
+  padding: 14px;
+  background: #25D366;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: white;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.btn-kirim-wa:active {
+  opacity: 0.9;
+  transform: scale(0.98);
+}
+
+.btn-kirim-wa:disabled {
+  background: #9CA3AF;
+  box-shadow: none;
+  cursor: default;
+}
+
+.btn-close-success {
+  width: 100%;
+  padding: 14px;
+  background: var(--grad);
+  border: none;
+  border-radius: var(--radius-sm);
+  color: white;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* ========== BOTTOM NAVIGATION ========== */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  border-top: 1px solid var(--border);
+  display: flex;
+  padding: 8px 0 12px;
+  z-index: 50;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.06);
+}
+
+.bn-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--teks-muda);
+  transition: color 0.2s;
+}
+
+.bn-item .bn-icon {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.bn-item.active {
+  color: var(--merah);
+}
+
+.bn-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 0;
+}
+
+.bn-fab {
+  width: 52px;
+  height: 52px;
+  background: var(--grad);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 28px;
+  box-shadow: 0 4px 16px rgba(220, 38, 38, 0.4);
+  cursor: pointer;
+  margin-top: -24px;
+  transition: transform 0.15s;
+}
+
+.bn-fab:active {
+  transform: scale(0.93);
+}
+
+/* ========== CHART CARDS ========== */
+.chart-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border);
+  margin-bottom: 16px;
+}
+
+.chart-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.chart-head h3 {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.chart-filter {
+  display: flex;
+  gap: 6px;
+}
+
+.cf-btn {
+  padding: 4px 10px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 600;
+  border: 1.5px solid var(--border);
+  background: var(--abu);
+  color: var(--teks-muda);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cf-btn.active {
+  border-color: var(--merah);
+  background: #FEF2F2;
+  color: var(--merah);
+}
+
+.chart-subtitle {
+  font-size: 11px;
+  color: var(--teks-muda);
+  margin-bottom: 14px;
+}
+
+.chart-summary {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.cs-item {
+  flex: 1;
+  background: var(--abu);
+  border-radius: var(--radius-sm);
+  padding: 10px;
+  text-align: center;
+}
+
+.cs-val {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--teks);
+  font-family: 'Nunito', sans-serif;
+}
+
+.cs-label {
+  font-size: 10px;
+  color: var(--teks-muda);
+  margin-top: 2px;
+}
+
+.cs-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin: 0 auto 4px;
+}
+
+.dot-merah {
+  background: #DC2626;
+}
+
+.dot-hijau {
+  background: #10B981;
+}
+
+.dot-kuning {
+  background: #F59E0B;
+}
+
+.chart-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.chart-svg {
+  width: 100%;
+  overflow: visible;
+}
+
+.chart-tooltip {
+  position: absolute;
+  background: #1F2937;
+  color: white;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+  white-space: nowrap;
+  z-index: 10;
+  transform: translateX(-50%);
+}
+
+.chart-tooltip::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-bottom: none;
+  border-top-color: #1F2937;
+}
+
+.chart-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+}
+
+.chart-labels span {
+  font-size: 9px;
+  color: var(--teks-muda);
+  font-weight: 600;
+}
+
+.donut-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 4px;
+}
+
+.donut-wrap {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  flex-shrink: 0;
+}
+
+.donut-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.donut-center-val {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--teks);
+  font-family: 'Nunito', sans-serif;
+  line-height: 1;
+}
+
+.donut-center-label {
+  font-size: 9px;
+  color: var(--teks-muda);
+}
+
+.donut-legend {
+  flex: 1;
+}
+
+.dl-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.dl-item:last-child {
+  margin-bottom: 0;
+}
+
+.dl-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.dl-info {
+  flex: 1;
+}
+
+.dl-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--teks);
+}
+
+.dl-pct {
+  font-size: 11px;
+  color: var(--teks-muda);
+}
+
+.dl-bar-wrap {
+  width: 60px;
+  background: var(--abu);
+  border-radius: 99px;
+  height: 5px;
+}
+
+.dl-bar {
+  height: 100%;
+  border-radius: 99px;
+  transition: width 0.6s ease;
+}
+
+/* ========== TOAST ========== */
+.toast {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: #1F2937;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 99px;
+  font-size: 13px;
+  font-weight: 600;
+  opacity: 0;
+  transition: all 0.3s;
+  z-index: 200;
+  white-space: nowrap;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ========== LAPORAN SCREEN ========== */
+#screen-laporan {
+  background: var(--abu);
+}
+
+.laporan-header {
+  background: var(--grad);
+  padding: 20px 20px 32px;
+  position: relative;
+}
+
+.laporan-header::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: var(--abu);
+  border-radius: 24px 24px 0 0;
+}
+
+.laporan-header h2 {
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.laporan-header p {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 13px;
+  margin-top: 2px;
+}
+
+.laporan-body {
+  padding: 16px;
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 100px;
+}
+
+.filter-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border);
+  margin-bottom: 12px;
+}
+
+.filter-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.filter-row input[type="date"] {
+  flex: 1;
+  min-width: 120px;
+  padding: 10px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: 13px;
+  background: var(--abu);
+  outline: none;
+}
+
+.filter-row input[type="date"]:focus {
+  border-color: var(--merah);
+}
+
+.btn-filter {
+  padding: 10px 16px;
+  background: var(--grad);
+  border: none;
+  border-radius: var(--radius-sm);
+  color: white;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.btn-filter:active {
+  opacity: 0.9;
+}
+
+.ringkasan-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.ringkasan-item {
+  flex: 1;
+  background: white;
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  text-align: center;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border);
+}
+
+.ringkasan-item .r-val {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--teks);
+  font-family: 'Nunito', sans-serif;
+}
+
+.ringkasan-item .r-label {
+  font-size: 10px;
+  color: var(--teks-muda);
+  margin-top: 2px;
+}
+
+.tabel-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border);
+  margin-bottom: 12px;
+  overflow-x: auto;
+}
+
+.tabel-card h4 {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--teks);
+}
+
+table.laporan-tabel {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+  min-width: 600px;
+}
+
+table.laporan-tabel th {
+  background: var(--abu);
+  padding: 8px 6px;
+  text-align: left;
+  font-weight: 700;
+  color: var(--teks-muda);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid var(--border);
+}
+
+table.laporan-tabel td {
+  padding: 8px 6px;
+  border-bottom: 1px solid var(--border);
+  color: var(--teks);
+}
+
+table.laporan-tabel tr:last-child td {
+  border-bottom: none;
+}
+
+.jenis-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 99px;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.jenis-badge.infak {
+  background: #FEF2F2;
+  color: #DC2626;
+}
+
+.jenis-badge.zakat {
+  background: #FFFBEB;
+  color: #F59E0B;
+}
+
+.jenis-badge.wakaf {
+  background: #ECFDF5;
+  color: #10B981;
+}
+
+.aksi-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.btn-aksi {
+  flex: 1;
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  border: none;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.btn-cetak {
+  background: #1F2937;
+  color: white;
+}
+
+.btn-share {
+  background: #25D366;
+  color: white;
+}
+
+.btn-aksi:active {
+  opacity: 0.9;
+}
+
+/* ========== PROFIL SCREEN ========== */
+#screen-profil {
+  background: var(--abu);
+}
+
+.profil-header {
+  background: var(--grad);
+  padding: 30px 20px 50px;
+  position: relative;
+  text-align: center;
+}
+
+.profil-header::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: var(--abu);
+  border-radius: 24px 24px 0 0;
+}
+
+.profil-foto-wrap {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 12px;
+}
+
+.profil-foto {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid white;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  background: white;
+}
+
+.profil-inisial {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--merah);
+  border: 3px solid white;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  font-family: 'Nunito', sans-serif;
+}
+
+.profil-header h2 {
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.profil-header p {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 13px;
+}
+
+.profil-body {
+  padding: 16px;
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 80px;
+}
+
+.profil-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border);
+  margin-bottom: 12px;
+}
+
+.profil-card h4 {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--teks-muda);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 14px;
+}
+
+.profil-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
+
+.profil-row:last-child {
+  border-bottom: none;
+}
+
+.profil-label {
+  color: var(--teks-muda);
+}
+
+.profil-val {
+  font-weight: 700;
+  color: var(--teks);
+}
+
+/* ========== DONATUR SCREEN ========== */
+#screen-donatur {
+  background: var(--abu);
+}
+
+/* ========== RIWAYAT SCREEN ========== */
+#screen-riwayat {
+  background: var(--abu);
+}
+
+/* ========== PRINT ========== */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #screen-laporan,
+  #screen-laporan * {
+    visibility: visible;
+  }
+  #screen-laporan {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+  .laporan-header {
+    background: white !important;
+    color: black !important;
+  }
+  .laporan-header h2,
+  .laporan-header p {
+    color: black !important;
+  }
+  .btn-filter,
+  .aksi-row,
+  .bottom-nav,
+  .laporan-back {
+    display: none !important;
+  }
+}
+</style>
+
+<!-- PWA & Icon -->
+<link rel="icon" type="image/webp" href="https://github.com/dany29326-prog/rumahsedekahalfurqon/blob/main/icon.webp?raw=true">
+<link rel="apple-touch-icon" href="https://github.com/dany29326-prog/rumahsedekahalfurqon/blob/main/icon.webp?raw=true">
+<meta name="theme-color" content="#DC2626">
+<link rel="manifest" href="manifest.json">
+</head>
+<body>
+
+<!-- SPLASH SCREEN -->
+<div class="screen active" id="splash">
+  <div class="splash-logo-wrap">
+    <img src="https://github.com/dany29326-prog/rumahsedekahalfurqon/blob/main/icon.webp?raw=true" alt="Rumah Sedekah Al Furqon">
+    <div class="splash-loader">
+      <div class="splash-loader-bar"></div>
+    </div>
+  </div>
+</div>
+
+<!-- LOGIN SCREEN -->
+<div class="screen" id="login">
+  <div class="login-header">
+    <h2>Selamat Datang 👋</h2>
+    <p>Masuk untuk mulai mencatat donasi</p>
+  </div>
+  <div class="login-body">
+    <div class="login-card">
+      <h3>Login Petugas</h3>
+      <div class="form-group">
+        <label>Nama Petugas</label>
+        <input type="text" id="login-nama" placeholder="Masukkan nama lengkap">
+      </div>
+      <div class="form-group" style="position:relative;">
+        <label>PIN Petugas (4-6 Digit)</label>
+        <input type="password" id="login-pass" placeholder="Masukkan kode akses" maxlength="6" style="padding-right:40px;">
+        <span id="toggle-mata" onclick="togglePassword()" style="position:absolute;right:16px;top:38px;cursor:pointer;font-size:18px;">👁️</span>
+      </div>
+      <div class="form-group" style="display:flex;align-items:center;gap:8px;margin-top:-8px;margin-bottom:16px;">
+        <input type="checkbox" id="login-remember" style="width:16px;height:16px;accent-color:var(--merah);cursor:pointer;">
+        <label for="login-remember" style="margin-bottom:0;cursor:pointer;font-size:13px;color:var(--teks-muda);font-weight:600;">Ingat Nama Saya</label>
+      </div>
+      <button class="btn-primary" onclick="doLogin()">Masuk →</button>
+      <p class="login-note">Hubungi admin jika lupa PIN</p>
+    </div>
+  </div>
+</div>
+
+<!-- DASHBOARD SCREEN -->
+<div class="screen" id="dashboard">
+  <div class="dash-header">
+    <div class="dash-topbar">
+      <div class="dash-ac">
+        <img src="https://github.com/dany29326-prog/rumahsedekahalfurqon/blob/main/icon.webp?raw=true" alt="RS Al Furqon" style="height:32px;">
+      </div>
+      <div class="dash-right">
+        <div class="dash-bell" onclick="showToast('Notifikasi segera hadir')">🔔</div>
+        <div class="dash-avatar" id="dash-av">M</div>
+      </div>
+    </div>
+    <div class="dash-greet">
+      <p>Assalamu'alaikum,</p>
+      <h2 id="dash-name">Petugas</h2>
+      <small id="dash-id">ID: -</small>
+      <small class="dash-area" id="dash-area" style="display:none;">📍 -</small>
+    </div>
+    <div class="dash-nav">
+      <div class="dash-nav-item active">Dashboard</div>
+      <div class="dash-nav-item" onclick="bukaRiwayat()">Riwayat</div>
+      <div class="dash-nav-item" onclick="bukaLaporan()">Laporan</div>
+    </div>
+  </div>
+  <div class="dash-body">
+    <div class="hero-card">
+      <div class="hero-label">Total Donasi Terkumpul</div>
+      <div class="hero-amount" id="dash-total">Rp 0</div>
+      <div class="hero-target">dari target <strong id="dash-target-text">Rp 0</strong></div>
+      <div class="hero-bar-wrap"><div class="hero-bar" id="dash-bar" style="width:0%"></div></div>
+      <div style="font-size:11px;color:rgba(255,255,255,0.8)" id="dash-bar-label">Rp 0 / Rp 0</div>
+      <div class="hero-pct"><div class="hero-pct-num" id="dash-pct">0%</div><div class="hero-pct-label">Tercapai</div></div>
+    </div>
+    <div class="quick-row">
+      <div class="quick-btn" onclick="goToForm()"><div class="q-icon q-merah">➕</div><span>Catat Donasi</span></div>
+      <div class="quick-btn" onclick="bukaLaporan()"><div class="q-icon q-hijau">📊</div><span>Laporan</span></div>
+      <div class="quick-btn" onclick="showToast('Fitur bagikan segera hadir')"><div class="q-icon q-kuning">📤</div><span>Bagikan</span></div>
+    </div>
+    <div class="stats-row">
+      <div class="stat-card"><div class="s-icon">👥</div><div class="s-val" id="stat-donatur">0</div><div class="s-label">Total Donatur</div><div class="s-trend s-up">↑ Aktif</div></div>
+      <div class="stat-card"><div class="s-icon">💰</div><div class="s-val" id="stat-avg">Rp 0</div><div class="s-label">Rata-rata Donasi</div><div class="s-trend s-up">↑ Per transaksi</div></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-head"><h3>Analitik Donasi</h3><div class="chart-filter"><div class="cf-btn active" id="cf-7" onclick="setChartFilter(7)">7H</div><div class="cf-btn" id="cf-14" onclick="setChartFilter(14)">2M</div><div class="cf-btn" id="cf-30" onclick="setChartFilter(30)">1Bln</div></div></div>
+      <div class="chart-subtitle" id="chart-subtitle">7 Hari Terakhir</div>
+      <div class="chart-summary"><div class="cs-item"><div class="cs-dot dot-merah"></div><div class="cs-val" id="cs-total">Rp 0</div><div class="cs-label">Total</div></div><div class="cs-item"><div class="cs-dot dot-hijau"></div><div class="cs-val" id="cs-peak">Rp 0</div><div class="cs-label">Tertinggi</div></div><div class="cs-item"><div class="cs-dot dot-kuning"></div><div class="cs-val" id="cs-avg-day">Rp 0</div><div class="cs-label">Rata/Hari</div></div></div>
+      <div class="chart-wrap"><svg class="chart-svg" id="donasi-chart" height="120" viewBox="0 0 320 120"></svg><div class="chart-tooltip" id="chart-tooltip"></div></div>
+      <div class="chart-labels" id="chart-labels"></div>
+    </div>
+    <div class="chart-card"><div class="chart-head" style="margin-bottom:12px;"><h3>Breakdown Jenis Donasi</h3></div><div class="donut-row"><div class="donut-wrap"><svg width="90" height="90" viewBox="0 0 90 90" id="donut-svg"></svg><div class="donut-center"><div class="donut-center-val" id="donut-total">0</div><div class="donut-center-label">Donatur</div></div></div><div class="donut-legend" id="donut-legend"></div></div></div>
+    <div class="section-head"><h3>Aktivitas Terbaru</h3><a onclick="bukaLaporan()">Lihat Semua</a></div>
+    <div id="aktivitas-list"><div style="text-align:center;padding:24px;color:var(--teks-muda);font-size:13px;">Belum ada donasi tercatat hari ini</div></div>
+  </div>
+  <div class="bottom-nav">
+    <div class="bn-item active" onclick="showScreen('dashboard')"><div class="bn-icon">🏠</div><span>Home</span></div>
+    <div class="bn-item" onclick="bukaRiwayat()"><div class="bn-icon">📋</div><span>Riwayat</span></div>
+    <div class="bn-center"><div class="bn-fab" onclick="goToForm()">＋</div></div>
+    <div class="bn-item" onclick="bukaMenuDonatur()"><div class="bn-icon">👥</div><span>Donatur</span></div>
+    <div class="bn-item" onclick="bukaProfil()"><div class="bn-icon">👤</div><span>Profil</span></div>
+  </div>
+</div>
+
+<!-- FORM DONASI SCREEN -->
+<div class="screen" id="form-donasi">
+  <div class="form-header">
+    <div class="form-back" onclick="showScreen('dashboard')">←</div>
+    <h2>Catat Donasi Baru</h2>
+    <p>Isi data donatur dengan lengkap</p>
+  </div>
+  <div class="form-body">
+    <div class="form-card"><h4>Tipe Donatur</h4><div class="donatur-type-row"><div class="dtype-btn active" id="type-umum" onclick="setDonaturType('umum')">👤 Umum</div><div class="dtype-btn" id="type-rutin" onclick="setDonaturType('rutin')">⭐ Rutin</div></div></div>
+    <div class="form-card"><h4>Data Donatur</h4><div id="form-umum"><div class="form-group"><label>Nama Donatur</label><input type="text" id="f-nama" placeholder="Nama lengkap donatur"></div><div class="form-group"><label>No. WhatsApp (opsional)</label><input type="tel" id="f-wa" placeholder="08xxxxxxxxxx"></div></div><div id="form-rutin" style="display:none;"><div class="form-group" id="search-container"><label>Cari Donatur Rutin</label><div style="display:flex;gap:8px;"><input type="text" id="f-search" placeholder="Ketik Nama / No HP / ID..." style="flex:1;padding:13px 16px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:inherit;font-size:14px;outline:none;"><button type="button" onclick="cariDonatur()" style="padding:0 16px;background:var(--merah);color:white;border:none;border-radius:var(--radius-sm);font-weight:700;cursor:pointer;">Cari</button></div></div><div id="search-result" style="margin-bottom:12px;max-height:180px;overflow-y:auto;"></div><div id="selected-donatur" style="display:none;background:#FEF2F2;padding:14px;border-radius:12px;border:1px solid #DC2626;"><div style="font-size:10px;color:#DC2626;font-weight:800;margin-bottom:4px;">✅ DONATUR TERPILIH</div><div id="sd-nama" style="font-size:15px;font-weight:800;color:var(--teks);font-family:'Nunito',sans-serif;">-</div><div id="sd-wa" style="font-size:12px;color:var(--teks-muda);margin-top:2px;">-</div><button type="button" onclick="resetSearch()" style="margin-top:10px;font-size:11px;color:#DC2626;background:none;border:none;cursor:pointer;font-weight:700;padding:0;">✕ Batal / Ganti Donatur</button></div></div></div>
+    <div class="form-card"><h4>Jenis Donasi</h4><div class="jenis-row"><div class="jenis-btn infak active" id="j-infak" onclick="setJenis('infak')"><div class="j-icon">💙</div><div class="j-label">INFAK</div></div><div class="jenis-btn zakat" id="j-zakat" onclick="setJenis('zakat')"><div class="j-icon">⭐</div><div class="j-label">ZAKAT</div></div><div class="jenis-btn wakaf" id="j-wakaf" onclick="setJenis('wakaf')"><div class="j-icon">🌿</div><div class="j-label">WAKAF</div></div></div></div>
+    <div class="form-card"><h4>Nominal Donasi</h4><div class="nominal-quick"><div class="nom-q" onclick="setNominal(50000)">Rp 50rb</div><div class="nom-q" onclick="setNominal(100000)">Rp 100rb</div><div class="nom-q" onclick="setNominal(250000)">Rp 250rb</div><div class="nom-q" onclick="setNominal(500000)">Rp 500rb</div><div class="nom-q" onclick="setNominal(1000000)">Rp 1jt</div></div><div class="form-group"><label>Atau masukkan nominal lain</label><div class="input-prefix-wrap"><span class="input-prefix">Rp</span><input type="number" id="f-nominal" placeholder="0" oninput="clearNomQ()"></div></div></div>
+    <div class="form-card"><h4>Catatan (opsional)</h4><div class="form-group" style="margin-bottom:0"><input type="text" id="f-catatan" placeholder="Pesan / catatan donatur"></div></div>
+    <button class="btn-submit" onclick="submitDonasi()"><span>💾</span> Simpan ke Google Sheets</button>
+  </div>
+</div>
+
+<!-- SUCCESS MODAL -->
+<div id="success-modal">
+  <div class="success-card">
+    <div class="success-icon">✅</div>
+    <h3>Donasi Berhasil!</h3>
+    <p>Data tersimpan ke Google Sheets</p>
+    <div class="success-detail">
+      <div class="sd-row"><span class="sd-label">No. Kwitansi</span><span class="sd-val" id="s-trxid" style="font-size:11px;color:#DC2626;">-</span></div>
+      <div class="sd-row"><span class="sd-label">Donatur</span><span class="sd-val" id="s-nama">-</span></div>
+      <div class="sd-row"><span class="sd-label">Nominal</span><span class="sd-val" id="s-nominal" style="color:#DC2626;">-</span></div>
+      <div class="sd-row"><span class="sd-label">Jenis</span><span class="sd-val" id="s-jenis">-</span></div>
+      <div class="sd-row"><span class="sd-label">Petugas</span><span class="sd-val" id="s-petugas">-</span></div>
+      <div class="sd-row"><span class="sd-label">Waktu</span><span class="sd-val" id="s-waktu">-</span></div>
+    </div>
+    <button class="btn-kirim-wa" id="btn-kirim-wa" onclick="kirimKwitansiWA()"><span>📲</span> Kirim Kwitansi via WA</button>
+    <div id="wa-skip-note" style="font-size:11px;color:#6B7280;text-align:center;margin-top:6px;display:none;">⚠️ Nomor WA donatur tidak diisi — kwitansi tidak dikirim</div>
+    <button class="btn-close-success" onclick="closeSuccess()">Kembali ke Dashboard →</button>
+  </div>
+</div>
+
+<!-- LAPORAN SCREEN -->
+<div class="screen" id="screen-laporan">
+  <div class="laporan-header">
+    <div class="form-back laporan-back" onclick="showScreen('dashboard')">←</div>
+    <h2>📊 Laporan Donasi</h2>
+    <p id="laporan-info-petugas">Semua Petugas</p>
+  </div>
+  <div class="laporan-body">
+    <div class="filter-card">
+      <h4 style="font-size:13px;font-weight:700;color:var(--teks-muda);margin-bottom:10px;">📅 Filter Periode</h4>
+      <div class="filter-row"><input type="date" id="laporan-tgl-mulai"><span style="color:var(--teks-muda);font-weight:600;">s/d</span><input type="date" id="laporan-tgl-selesai"><button class="btn-filter" onclick="tampilkanLaporan()">🔍 Tampilkan</button></div>
+      <div class="filter-row" style="margin-top:8px;"><button class="cf-btn active" onclick="setPeriodeCepat(7)">7 Hari</button><button class="cf-btn" onclick="setPeriodeCepat(30)">30 Hari</button><button class="cf-btn" onclick="setPeriodeCepat('bulan-ini')">Bulan Ini</button></div>
+    </div>
+    <div class="ringkasan-row" id="laporan-ringkasan"><div class="ringkasan-item"><div class="r-val" id="lr-total">Rp 0</div><div class="r-label">Total Donasi</div></div><div class="ringkasan-item"><div class="r-val" id="lr-transaksi">0</div><div class="r-label">Transaksi</div></div><div class="ringkasan-item"><div class="r-val" id="lr-rata">Rp 0</div><div class="r-label">Rata-rata</div></div></div>
+    <div class="ringkasan-row" id="laporan-breakdown"><div class="ringkasan-item"><div class="r-val" style="color:#DC2626;" id="lr-infak">Rp 0</div><div class="r-label">💙 Infak</div></div><div class="ringkasan-item"><div class="r-val" style="color:#F59E0B;" id="lr-zakat">Rp 0</div><div class="r-label">⭐ Zakat</div></div><div class="ringkasan-item"><div class="r-val" style="color:#10B981;" id="lr-wakaf">Rp 0</div><div class="r-label">🌿 Wakaf</div></div></div>
+    <div class="tabel-card" id="laporan-tabel-card"><h4>📋 Detail Transaksi</h4><div style="overflow-x:auto;"><table class="laporan-tabel"><thead><tr><th>No</th><th>Tanggal</th><th>No. Kwitansi</th><th>Donatur</th><th>Jenis</th><th>Nominal</th><th>Petugas</th></tr></thead><tbody id="laporan-tbody"><tr><td colspan="7" style="text-align:center;padding:20px;color:var(--teks-muda);">🔍 Pilih periode dan klik Tampilkan</td></tr></tbody></table></div></div>
+    <div class="aksi-row"><button class="btn-aksi btn-cetak" onclick="cetakLaporan()">🖨️ Cetak PDF</button><button class="btn-aksi btn-share" onclick="shareLaporanWA()">📲 Share via WA</button></div>
+  </div>
+</div>
+
+<!-- PROFIL SCREEN -->
+<div class="screen" id="screen-profil">
+  <div class="profil-header">
+    <div class="form-back" onclick="showScreen('dashboard')" style="position:absolute;left:20px;top:20px;">←</div>
+    <div class="profil-foto-wrap" id="profil-foto-wrap"><div class="profil-inisial" id="profil-inisial">M</div><img class="profil-foto" id="profil-foto" src="" style="display:none;" onerror="this.style.display='none';document.getElementById('profil-inisial').style.display='flex';"></div>
+    <h2 id="profil-nama">Nama Petugas</h2><p id="profil-id">ID: -</p>
+  </div>
+  <div class="profil-body">
+    <div class="profil-card"><h4>📋 Info Petugas</h4><div class="profil-row"><span class="profil-label">ID Petugas</span><span class="profil-val" id="p-id">-</span></div><div class="profil-row"><span class="profil-label">Nama Lengkap</span><span class="profil-val" id="p-nama">-</span></div><div class="profil-row"><span class="profil-label">Area / Wilayah</span><span class="profil-val" id="p-area">-</span></div><div class="profil-row"><span class="profil-label">Status</span><span class="profil-val" id="p-status" style="color:#10B981;">Aktif</span></div></div>
+    <div class="profil-card"><h4>📊 Statistik Saya</h4><div class="profil-row"><span class="profil-label">Total Donasi</span><span class="profil-val" id="p-total" style="color:#DC2626;">Rp 0</span></div><div class="profil-row"><span class="profil-label">Total Transaksi</span><span class="profil-val" id="p-transaksi">0</span></div><div class="profil-row"><span class="profil-label">Rata-rata Donasi</span><span class="profil-val" id="p-rata">Rp 0</span></div></div>
+    <div class="profil-card" id="profil-target-card" style="display:block;"><h4>🎯 Target Bulanan</h4><div style="font-size:20px;font-weight:800;color:var(--teks);font-family:'Nunito',sans-serif;" id="p-target">Rp 0</div><div class="hero-bar-wrap" style="margin:8px 0;background:var(--border);"><div class="hero-bar" id="p-target-bar" style="width:0%;background:var(--grad);height:8px;border-radius:99px;"></div></div><div style="font-size:11px;color:var(--teks-muda);" id="p-target-pct">0% Tercapai</div></div>
+    <button class="btn-aksi btn-cetak" onclick="doLogout()" style="width:100%;margin-top:8px;">🚪 Keluar / Logout</button>
+  </div>
+</div>
+
+<!-- RIWAYAT SCREEN -->
+<div class="screen" id="screen-riwayat">
+  <div class="laporan-header"><div class="form-back laporan-back" onclick="showScreen('dashboard')">←</div><h2>📋 Riwayat Donasi Saya</h2><p id="riwayat-info-petugas">-</p></div>
+  <div class="laporan-body">
+    <div class="ringkasan-row" id="riwayat-ringkasan"><div class="ringkasan-item"><div class="r-val" id="rw-total">Rp 0</div><div class="r-label">Total Donasi</div></div><div class="ringkasan-item"><div class="r-val" id="rw-transaksi">0</div><div class="r-label">Transaksi</div></div><div class="ringkasan-item"><div class="r-val" id="rw-rata">Rp 0</div><div class="r-label">Rata-rata</div></div></div>
+    <div class="tabel-card"><h4>📋 Daftar Donasi</h4><div style="overflow-x:auto;"><table class="laporan-tabel"><thead><tr><th>No</th><th>Tanggal</th><th>No. Kwitansi</th><th>Donatur</th><th>Jenis</th><th>Nominal</th></tr></thead><tbody id="riwayat-tbody"><tr><td colspan="6" style="text-align:center;padding:20px;color:var(--teks-muda);">⏳ Memuat data...</td></tr></tbody></table></div></div>
+  </div>
+</div>
+
+<!-- DONATUR SCREEN -->
+<div class="screen" id="screen-donatur">
+  <div style="padding:40px 24px 60px;background:var(--grad);color:white;">
+    <div onclick="showScreen('dashboard')" style="cursor:pointer;font-size:24px;margin-bottom:12px;display:inline-block;font-weight:bold;">←</div>
+    <h2>Daftar Donatur 👥</h2><p style="font-size:13px;opacity:0.9;margin-top:4px;">Database donatur rutin Rumah Sedekah Al Furqon</p>
+  </div>
+  <div style="margin-top:-30px;border-radius:20px;background:white;padding:24px;box-shadow:var(--shadow-card);margin-left:20px;margin-right:20px;">
+    <div class="form-group"><label style="display:block;font-size:12px;font-weight:600;color:var(--teks-muda);margin-bottom:6px;">Cari Nama / No. WA</label><input type="text" id="search-list-donatur" placeholder="Ketik untuk mencari..." onkeyup="renderDaftarDonatur()" style="width:100%;padding:13px 16px;border:1.5px solid var(--border);border-radius:12px;outline:none;font-family:inherit;"></div>
+    <div id="list-donatur-container" style="margin-top:12px;max-height:400px;overflow-y:auto;"></div>
+    <div style="margin-top:12px;"><button class="btn-filter" onclick="toggleFormDonatur()" style="width:100%;">➕ Tambah Donatur Baru</button></div>
+    <div id="form-donatur-baru" style="display:none;margin-top:12px;background:white;border-radius:12px;padding:16px;box-shadow:var(--shadow-card);border:1px solid var(--border);">
+      <h4 style="font-size:13px;font-weight:700;color:var(--teks-muda);margin-bottom:12px;">📝 Tambah Donatur Baru</h4>
+      <div class="form-group"><label>Nama Donatur</label><input type="text" id="donatur-nama" placeholder="Nama lengkap"></div>
+      <div class="form-group"><label>No. WhatsApp</label><input type="tel" id="donatur-wa" placeholder="08xxxxxxxxxx"></div>
+      <div class="form-group"><label>Alamat (opsional)</label><input type="text" id="donatur-alamat" placeholder="Alamat lengkap"></div>
+      <button class="btn-primary" onclick="simpanDonaturBaru()">💾 Simpan Donatur</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ============================================================
+//  RUMAH SEDEKAH AL FURQON - Frontend Script
+//  Ganti GAS_URL ini dengan URL Web App hasil deploy
+// ============================================================
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbwVu0fXcqky28aP5NSRrLnbpC93B2Y1oCmo1h5JoYjm30TJ931T89kr0-qph92UFU7QaA/exec';
+
+let currentPetugas = null;
+let donaturType = 'umum';
+let jenisSelected = 'infak';
+let donasiList = [];
+let allDonatur = [];
+let selectedDonaturData = null;
+let kwitansiAktif = null;
+let chartDays = 7;
+let chartData = [];
+
+// ========== SPLASH & INIT ==========
+setTimeout(() => {
+  const savedNama = localStorage.getItem('alfurqon_nama');
+  if (savedNama) {
+    document.getElementById('login-nama').value = savedNama;
+    document.getElementById('login-remember').checked = true;
+    document.getElementById('login-pass').value = '';
+    showScreen('login');
+    setTimeout(() => { document.getElementById('login-pass').focus(); }, 400);
+  } else {
+    showScreen('login');
+  }
+}, 2200);
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+function formatRp(n) {
+  return 'Rp ' + n.toLocaleString('id-ID');
+}
+
+function formatRpShort(n) {
+  if (n >= 1000000) return 'Rp ' + (n / 1000000).toFixed(1).replace('.0', '') + 'jt';
+  if (n >= 1000) return 'Rp ' + (n / 1000).toFixed(0) + 'rb';
+  return 'Rp ' + n;
+}
+
+// ========== PASSWORD TOGGLE ==========
+function togglePassword() {
+  const passInput = document.getElementById('login-pass');
+  const mata = document.getElementById('toggle-mata');
+  if (passInput.type === 'password') {
+    passInput.type = 'text';
+    mata.textContent = '🙈';
+  } else {
+    passInput.type = 'password';
+    mata.textContent = '👁️';
+  }
+}
+
+// ========== LOGIN ==========
+async function doLogin() {
+  const nama = document.getElementById('login-nama').value.trim();
+  const pass = document.getElementById('login-pass').value.trim();
+  const remember = document.getElementById('login-remember').checked;
+  
+  if (!nama || !pass) {
+    showToast('Nama & PIN harus diisi');
+    return;
+  }
+  
+  const btn = document.querySelector('.btn-primary');
+  const originalText = btn.textContent;
+  btn.textContent = '⏳ Memverifikasi...';
+  btn.disabled = true;
+  
+  // Cek cache
+  const cacheKey = 'alfurqon_auth_' + nama.toLowerCase();
+  const cacheRaw = localStorage.getItem(cacheKey);
+  if (cacheRaw) {
+    try {
+      const cache = JSON.parse(cacheRaw);
+      if (Date.now() < cache.expiry && cache.pass === pass && cache.petugas.status.toLowerCase() === 'aktif') {
+        currentPetugas = cache.petugas;
+        currentPetugas.target = currentPetugas.target || 5000000;
+        if (remember) localStorage.setItem('alfurqon_nama', nama);
+        else localStorage.removeItem('alfurqon_nama');
+        setDashboardUI();
+        updateDashboard();
+        renderChart();
+        fetchDatabaseDonatur();
+        fetchDashboardData();
+        renderAktivitas();
+        showScreen('dashboard');
+        btn.textContent = originalText;
+        btn.disabled = false;
+        showToast('⚡ Login instan, ' + currentPetugas.nama + '!');
+        return;
+      }
+    } catch(e) {}
+  }
+  
+  // Fetch ke server
+  try {
+    const response = await fetch(GAS_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ action: "cek_login", nama: nama, password: pass })
+    });
+    const result = await response.json();
+    if (result.status === "ok") {
+      currentPetugas = result.petugas;
+      currentPetugas.target = currentPetugas.target || 5000000;
+      
+      localStorage.setItem(cacheKey, JSON.stringify({
+        nama: nama,
+        pass: pass,
+        petugas: result.petugas,
+        expiry: Date.now() + (24 * 60 * 60 * 1000)
+      }));
+      
+      if (remember) localStorage.setItem('alfurqon_nama', nama);
+      else localStorage.removeItem('alfurqon_nama');
+      
+      setDashboardUI();
+      updateDashboard();
+      renderChart();
+      fetchDatabaseDonatur();
+      fetchDashboardData();
+      renderAktivitas();
+      showScreen('dashboard');
+      showToast('✅ Login berhasil, ' + currentPetugas.nama + '!');
+    } else {
+      showToast('❌ ' + (result.message || 'Login gagal'));
+      document.getElementById('login-pass').value = '';
+      if (remember) localStorage.setItem('alfurqon_nama', nama);
+    }
+  } catch (error) {
+    showToast('Gagal terhubung ke server.');
+  }
+  btn.textContent = originalText;
+  btn.disabled = false;
+}
+
+function setDashboardUI() {
+  document.getElementById('dash-name').textContent = currentPetugas.nama + ' 👋';
+  document.getElementById('dash-id').textContent = 'ID: ' + currentPetugas.id + ' • Fundraiser Aktif';
+  const dashAv = document.getElementById('dash-av');
+  if (currentPetugas.foto) {
+    dashAv.innerHTML = `<img class="dash-avatar-foto" src="${currentPetugas.foto}" onerror="this.style.display='none';this.parentElement.textContent='${currentPetugas.nama.charAt(0).toUpperCase()}';">`;
+  } else {
+    dashAv.textContent = currentPetugas.nama.charAt(0).toUpperCase();
+  }
+  if (currentPetugas.area) {
+    document.getElementById('dash-area').textContent = '📍 ' + currentPetugas.area;
+    document.getElementById('dash-area').style.display = 'inline-block';
+  } else {
+    document.getElementById('dash-area').style.display = 'none';
+  }
+}
+
+function doLogout() {
+  const savedNama = localStorage.getItem('alfurqon_nama');
+  if (savedNama) {
+    localStorage.removeItem('alfurqon_auth_' + savedNama.toLowerCase());
+  }
+  currentPetugas = null;
+  showScreen('login');
+  if (savedNama) {
+    document.getElementById('login-nama').value = savedNama;
+    document.getElementById('login-remember').checked = true;
+  } else {
+    document.getElementById('login-nama').value = '';
+    document.getElementById('login-remember').checked = false;
+  }
+  document.getElementById('login-pass').value = '';
+}
+
+// ========== DASHBOARD FUNCTIONS ==========
+function updateDashboard() {
+  const total = donasiList.reduce((s, d) => s + d.nominal, 0);
+  const target = currentPetugas.target || 5000000;
+  const pct = Math.min(Math.round(total / target * 100), 100);
+  document.getElementById('dash-total').textContent = formatRp(total);
+  document.getElementById('dash-bar').style.width = pct + '%';
+  document.getElementById('dash-pct').textContent = pct + '%';
+  document.getElementById('dash-bar-label').textContent = formatRpShort(total) + ' / ' + formatRpShort(target);
+  document.getElementById('stat-donatur').textContent = donasiList.length;
+  document.getElementById('dash-target-text').textContent = formatRp(currentPetugas.target || 5000000);
+  renderChart();
+}
+
+async function renderAktivitas() {
+  const list = document.getElementById('aktivitas-list');
+  list.innerHTML = '<div style="text-align:center;padding:24px;color:var(--teks-muda);font-size:13px;">⏳ Memuat aktivitas...</div>';
+  try {
+    const res = await fetch(GAS_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ action: "get_aktivitas" })
+    });
+    const data = await res.json();
+    if (data.status === "ok" && data.data.length > 0) {
+      list.innerHTML = data.data.map(d => `
+        <div class="donasi-item">
+          <div class="di-avatar">${d.donatur.charAt(0).toUpperCase()}</div>
+          <div class="di-info"><div class="di-name">${d.donatur}</div><div class="di-meta">${d.jenis.toUpperCase()} • ${d.tanggal} ${d.waktu} • oleh ${d.petugas_nama}</div></div>
+          <div class="di-right"><div class="di-amount">${formatRpShort(d.nominal)}</div><span class="di-type type-${d.jenis.toLowerCase()}">${d.jenis.toUpperCase()}</span></div>
+        </div>
+      `).join('');
+    } else {
+      list.innerHTML = '<div style="text-align:center;padding:24px;color:var(--teks-muda);font-size:13px;">Belum ada donasi tercatat</div>';
+    }
+  } catch (e) {
+    list.innerHTML = '<div style="text-align:center;padding:24px;color:var(--teks-muda);font-size:13px;">Gagal memuat aktivitas</div>';
+  }
+}
+
+async function fetchDashboardData() {
+  try {
+    const res = await fetch(GAS_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ action: "get_dashboard", petugas_id: currentPetugas ? currentPetugas.id : "" })
+    });
+    const data = await res.json();
+    if (data.status === "ok") {
+      const total = data.donasi_saya || data.total_all || 0;
+      const target = currentPetugas.target || 5000000;
+      const pct = Math.min(Math.round(total / target * 100), 100);
+      document.getElementById('dash-total').textContent = formatRp(total);
+      document.getElementById('dash-bar').style.width = pct + '%';
+      document.getElementById('dash-pct').textContent = pct + '%';
+      document.getElementById('dash-bar-label').textContent = formatRpShort(total) + ' / ' + formatRpShort(target);
+      document.getElementById('dash-target-text').textContent = formatRp(target);
+      document.getElementById('stat-donatur').textContent = (data.jml_donatur || 0).toLocaleString('id-ID');
+      document.getElementById('stat-avg').textContent = formatRpShort(data.avg_donasi || 0);
+      
+      if (data.chart_harian && data.chart_harian.length > 0) {
+        window.serverChartData = data.chart_harian;
+        setChartFilter(7);
+      }
+      
+      const donutLegend = document.getElementById('donut-legend');
+      if (donutLegend) {
+        const totalSemua = (data.infak || 0) + (data.zakat || 0) + (data.wakaf || 0);
+        const pctInfak = totalSemua ? Math.round((data.infak / totalSemua) * 100) : 0;
+        const pctZakat = totalSemua ? Math.round((data.zakat / totalSemua) * 100) : 0;
+        const pctWakaf = totalSemua ? Math.round((data.wakaf / totalSemua) * 100) : 0;
+        donutLegend.innerHTML = `
+          <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:13px;"><span><span style="color:#DC2626;margin-right:4px;">●</span> Infak (${pctInfak}%)</span><span style="font-weight:600;">Rp ${(data.infak || 0).toLocaleString('id-ID')}</span></div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:13px;"><span><span style="color:#F59E0B;margin-right:4px;">●</span> Zakat (${pctZakat}%)</span><span style="font-weight:600;">Rp ${(data.zakat || 0).toLocaleString('id-ID')}</span></div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:13px;"><span><span style="color:#10B981;margin-right:4px;">●</span> Wakaf (${pctWakaf}%)</span><span style="font-weight:600;">Rp ${(data.wakaf || 0).toLocaleString('id-ID')}</span></div>
+        `;
+      }
+      document.getElementById('donut-total').textContent = data.jml_donatur || 0;
+    }
+  } catch (e) {
+    console.log('Gagal fetch dashboard:', e);
+  }
+}
+
+// ========== CHART FUNCTIONS ==========
+function generateDemoData() {
+  const now = new Date();
+  chartData = [];
+  for (let i = 29; i >= 0; i--) {
+    const d = new Date(now);
+    d.setDate(d.getDate() - i);
+    chartData.push({ date: d, total: Math.round((800000 + Math.random() * 2400000) * ((i === 14 || i === 6 || i === 2) ? 1.8 : 1)), count: Math.floor(3 + Math.random() * 12) });
+  }
+  if (donasiList.length) {
+    chartData[chartData.length - 1].total += donasiList.reduce((s, d) => s + d.nominal, 0);
+    chartData[chartData.length - 1].count += donasiList.length;
+  }
+}
+
+function setChartFilter(days) {
+  chartDays = days;
+  ['7', '14', '30'].forEach(d => document.getElementById('cf-' + d).classList.toggle('active', parseInt(d) === days));
+  const subtitleMap = { 7: '7 Hari Terakhir', 14: '14 Hari Terakhir', 30: '30 Hari Terakhir' };
+  document.getElementById('chart-subtitle').textContent = subtitleMap[days];
+  renderChart();
+}
+
+function renderChart() {
+  if (window.serverChartData && window.serverChartData.length > 0) {
+    chartData = window.serverChartData.map((d, idx) => {
+      const date = new Date();
+      date.setDate(date.getDate() - (29 - idx));
+      return { date: date, total: d.total, count: 0 };
+    });
+  } else {
+    generateDemoData();
+  }
+  const slice = chartData.slice(-chartDays);
+  const W = 320, H = 120, padL = 0, padR = 0, padT = 12, padB = 20;
+  const maxVal = Math.max(...slice.map(d => d.total)) || 1;
+  const toX = i => padL + (i / (slice.length - 1)) * (W - padL - padR);
+  const toY = v => padT + (1 - (v - 0) / (maxVal - 0 || 1)) * (H - padT - padB);
+  const pts = slice.map((d, i) => ({ x: toX(i), y: toY(d.total), d }));
+  
+  function catmull(pts) {
+    if (pts.length < 2) return '';
+    let d = `M ${pts[0].x} ${pts[0].y}`;
+    for (let i = 0; i < pts.length - 1; i++) {
+      const p0 = pts[Math.max(i - 1, 0)], p1 = pts[i], p2 = pts[i + 1], p3 = pts[Math.min(i + 2, pts.length - 1)];
+      d += ` C ${p1.x + (p2.x - p0.x) / 6} ${p1.y + (p2.y - p0.y) / 6}, ${p2.x - (p3.x - p1.x) / 6} ${p2.y - (p3.y - p1.y) / 6}, ${p2.x} ${p2.y}`;
+    }
+    return d;
+  }
+  
+  const linePath = catmull(pts);
+  const areaPath = linePath + ` L ${pts[pts.length - 1].x} ${H - padB} L ${pts[0].x} ${H - padB} Z`;
+  
+  document.getElementById('donasi-chart').innerHTML = `
+    <defs>
+      <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#DC2626" stop-opacity="0.18"/>
+        <stop offset="100%" stop-color="#DC2626" stop-opacity="0.02"/>
+      </linearGradient>
+      <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#DC2626"/>
+        <stop offset="100%" stop-color="#B91C1C"/>
+      </linearGradient>
+    </defs>
+    ${[0.25, 0.5, 0.75, 1].map(f => { const y = padT + f * (H - padT - padB); return `<line x1="${padL}" y1="${y}" x2="${W - padR}" y2="${y}" stroke="#E5E7EB" stroke-width="1"/>`; }).join('')}
+    <path d="${areaPath}" fill="url(#chartGrad)"/>
+    <path d="${linePath}" fill="none" stroke="url(#lineGrad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    ${pts.map((p, i) => `<circle cx="${p.x}" cy="${p.y}" r="4" fill="white" stroke="url(#lineGrad)" stroke-width="2" class="chart-dot" data-i="${i}" style="cursor:pointer"/>`).join('')}
+  `;
+  
+  document.querySelectorAll('.chart-dot').forEach((dot, i) => {
+    dot.addEventListener('mouseenter', e => showChartTooltip(e, pts[i], slice[i]));
+    dot.addEventListener('mouseleave', hideChartTooltip);
+  });
+  
+  const step = Math.ceil(chartDays / 6);
+  const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+  document.getElementById('chart-labels').innerHTML = slice.map((d, i) => (i % step !== 0 && i !== slice.length - 1) ? '<span></span>' : `<span>${d.date.getDate()} ${monthNames[d.date.getMonth()]}</span>`).join('');
+  
+  const totalSum = slice.reduce((s, d) => s + d.total, 0);
+  document.getElementById('cs-total').textContent = formatRpShort(totalSum);
+  document.getElementById('cs-peak').textContent = formatRpShort(Math.max(...slice.map(d => d.total)));
+  document.getElementById('cs-avg-day').textContent = formatRpShort(Math.round(totalSum / slice.length));
+  
+  // Donut sederhana untuk breakdown
+  const demoCounts = { infak: 18, zakat: 8, wakaf: 5 };
+  donasiList.forEach(d => { demoCounts[d.jenis] = (demoCounts[d.jenis] || 0) + 1; });
+  const total = Object.values(demoCounts).reduce((s, v) => s + v, 0);
+  const colors = { infak: '#DC2626', zakat: '#F59E0B', wakaf: '#10B981' };
+  const labels = { infak: 'Infak', zakat: 'Zakat', wakaf: 'Wakaf' };
+  const R = 36, r = 24, cx = 45, cy = 45;
+  let startAngle = -Math.PI / 2, paths = '';
+  Object.entries(demoCounts).forEach(([key, val]) => {
+    const angle = (val / total) * 2 * Math.PI;
+    const endAngle = startAngle + angle;
+    const x1 = cx + R * Math.cos(startAngle), y1 = cy + R * Math.sin(startAngle);
+    const x2 = cx + R * Math.cos(endAngle), y2 = cy + R * Math.sin(endAngle);
+    const x3 = cx + r * Math.cos(endAngle), y3 = cy + r * Math.sin(endAngle);
+    const x4 = cx + r * Math.cos(startAngle), y4 = cy + r * Math.sin(startAngle);
+    const large = angle > Math.PI ? 1 : 0;
+    paths += `<path d="M${x1},${y1} A${R},${R},0,${large},1,${x2},${y2} L${x3},${y3} A${r},${r},0,${large},0,${x4},${y4} Z" fill="${colors[key]}" opacity="0.9"/>`;
+    startAngle = endAngle;
+  });
+  document.getElementById('donut-svg').innerHTML = paths;
+  document.getElementById('donut-total').textContent = total;
+  document.getElementById('donut-legend').innerHTML = Object.entries(demoCounts).map(([key, val]) => { const pct = Math.round(val / total * 100); return `<div class="dl-item"><div class="dl-dot" style="background:${colors[key]}"></div><div class="dl-info"><div class="dl-name">${labels[key]}</div><div class="dl-pct">${val} donatur • ${pct}%</div></div><div class="dl-bar-wrap"><div class="dl-bar" style="width:${pct}%;background:${colors[key]}"></div></div></div>`; }).join('');
+}
+
+function showChartTooltip(e, pt, data) {
+  const tip = document.getElementById('chart-tooltip');
+  const rect = document.getElementById('donasi-chart').getBoundingClientRect();
+  const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+  tip.innerHTML = `<strong>${data.date.getDate()} ${monthNames[data.date.getMonth()]}</strong><br>${formatRpShort(data.total)} • ${data.count} donatur`;
+  tip.style.left = (pt.x * rect.width / 320) + 'px';
+  tip.style.top = (pt.y * rect.height / 120 - 48) + 'px';
+  tip.style.opacity = '1';
+}
+
+function hideChartTooltip() {
+  document.getElementById('chart-tooltip').style.opacity = '0';
+}
+
+// ========== FORM DONASI ==========
+function goToForm() {
+  resetForm();
+  showScreen('form-donasi');
+}
+
+function resetForm() {
+  document.getElementById('f-nama').value = '';
+  document.getElementById('f-wa').value = '';
+  document.getElementById('f-nominal').value = '';
+  document.getElementById('f-catatan').value = '';
+  setDonaturType('umum');
+  setJenis('infak');
+  document.querySelectorAll('.nom-q').forEach(n => n.classList.remove('active'));
+  resetSearch();
+}
+
+function setDonaturType(type) {
+  donaturType = type;
+  document.getElementById('type-umum').classList.toggle('active', type === 'umum');
+  document.getElementById('type-rutin').classList.toggle('active', type === 'rutin');
+  const formUmum = document.getElementById('form-umum');
+  const formRutin = document.getElementById('form-rutin');
+  if (formUmum && formRutin) {
+    if (type === 'umum') {
+      formUmum.style.display = 'block';
+      formRutin.style.display = 'none';
+    } else {
+      formUmum.style.display = 'none';
+      formRutin.style.display = 'block';
+    }
+  }
+}
+
+function setJenis(j) {
+  jenisSelected = j;
+  ['infak', 'zakat', 'wakaf'].forEach(x => {
+    document.getElementById('j-' + x).classList.toggle('active', x === j);
+  });
+}
+
+function setNominal(val) {
+  document.getElementById('f-nominal').value = val;
+  document.querySelectorAll('.nom-q').forEach((n, i) => {
+    const vals = [50000, 100000, 250000, 500000, 1000000];
+    n.classList.toggle('active', vals[i] === val);
+  });
+}
+
+function clearNomQ() {
+  document.querySelectorAll('.nom-q').forEach(n => n.classList.remove('active'));
+}
+
+async function submitDonasi() {
+  let nama = '', wa = '';
+  if (donaturType === 'rutin') {
+    if (!selectedDonaturData) {
+      showToast('Pilih donatur rutin terlebih dahulu!');
+      return;
+    }
+    nama = selectedDonaturData.nama;
+    wa = selectedDonaturData.hp;
+  } else {
+    nama = document.getElementById('f-nama').value.trim();
+    wa = document.getElementById('f-wa').value.trim();
+    if (!nama) {
+      showToast('Nama donatur harus diisi');
+      return;
+    }
+  }
+  
+  const nominal = parseInt(document.getElementById('f-nominal').value) || 0;
+  const catatan = document.getElementById('f-catatan').value.trim();
+  if (nominal < 1000) {
+    showToast('Nominal minimal Rp 1.000');
+    return;
+  }
+  
+  const now = new Date();
+  const waktuStr = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+  const tglStr = now.toLocaleDateString('id-ID', { day: '2-digit', month: '2-digit', year: 'numeric' });
+  
+  const data = {
+    action: "input_donasi",
+    tanggal: tglStr,
+    waktu: waktuStr,
+    petugas_id: currentPetugas.id,
+    petugas_nama: currentPetugas.nama,
+    donatur_nama: nama,
+    donatur_type: donaturType,
+    donatur_wa: wa,
+    jenis: jenisSelected,
+    nominal: nominal,
+    catatan: catatan,
+    metode_bayar: "Cash"
+  };
+  
+  const btn = document.querySelector('.btn-submit');
+  const originalHTML = btn.innerHTML;
+  btn.innerHTML = '⏳ Menyimpan...';
+  btn.disabled = true;
+  
+  try {
+    const response = await fetch(GAS_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(data)
+    });
+    const res = await response.json();
+    if (res.status === "ok" || res.success) {
+      donasiList.push({ nama, nominal, jenis: jenisSelected, type: donaturType, waktu: waktuStr });
+      updateDashboard();
+      data.trx_id = res.trx_id;
+      data.wa_number = res.wa_number;
+      data.wa_text = res.wa_text;
+      showSuccess(data);
+    } else {
+      showToast("Gagal menyimpan: " + (res.message || "Server Error"));
+    }
+  } catch (e) {
+    showToast("Gagal terhubung ke server.");
+  }
+  btn.innerHTML = originalHTML;
+  btn.disabled = false;
+}
+
+function generateTrxId() {
+  const now = new Date();
+  const tgl = now.toLocaleDateString('id-ID', { year: 'numeric', month: '2-digit', day: '2-digit' }).split('/').reverse().join('');
+  return `RSF-${tgl}-${String(donasiList.length).padStart(3, '0')}`;
+}
+
+function showSuccess(data) {
+  const trxId = data.trx_id || generateTrxId();
+  kwitansiAktif = { ...data, trxId };
+  document.getElementById('s-trxid').textContent = trxId;
+  document.getElementById('s-nama').textContent = data.donatur_nama;
+  document.getElementById('s-nominal').textContent = formatRp(data.nominal);
+  document.getElementById('s-jenis').textContent = data.jenis.toUpperCase();
+  document.getElementById('s-petugas').textContent = data.petugas_nama + ' (' + data.petugas_id + ')';
+  document.getElementById('s-waktu').textContent = data.tanggal + ' ' + data.waktu;
+  
+  const btnWA = document.getElementById('btn-kirim-wa');
+  const skipNote = document.getElementById('wa-skip-note');
+  if (data.donatur_wa && data.donatur_wa.length >= 9) {
+    btnWA.style.display = 'flex';
+    btnWA.disabled = false;
+    btnWA.innerHTML = '📲 Kirim Kwitansi via WA';
+    skipNote.style.display = 'none';
+  } else {
+    btnWA.style.display = 'none';
+    skipNote.style.display = 'block';
+  }
+  document.getElementById('success-modal').classList.add('show');
+}
+
+function kirimKwitansiWA() {
+  if (!kwitansiAktif) return;
+  const d = kwitansiAktif;
+  let nomor = d.donatur_wa.replace(/\D/g, '');
+  if (nomor.startsWith('0')) nomor = '62' + nomor.slice(1);
+  else if (nomor.startsWith('8')) nomor = '62' + nomor;
+  const nominalFmt = formatRp(d.nominal);
+  const baris = '━━━━━━━━━━━━━━━━━━━━━━━━';
+  const pesan = `╔══════════════════════╗\n   🕌 *RUMAH SEDEKAH AL FURQON*\n     📋 *BUKTI DONASI RESMI*\n╚══════════════════════╝\n\n${baris}\n🔖 *No. Kwitansi*\n    ${d.trxId}\n\n📅 *Tanggal* : ${d.tanggal}\n⏰ *Waktu*   : ${d.waktu} WIB\n${baris}\n\n👤 *Nama Donatur*\n    ${d.donatur_nama}\n\n💚 *Jenis Donasi* : *${d.jenis.toUpperCase()}*\n💰 *Nominal*      : *${nominalFmt}*\n💳 *Metode Bayar* : ${d.metode_bayar || 'Cash'}\n${d.catatan ? `📝 *Catatan* : ${d.catatan}\n` : ''}\n${baris}\n🧑 *Petugas* : ${d.petugas_nama}\n🪪 *ID*      : ${d.petugas_id}\n${baris}\n\n✅ *Donasi Anda telah diterima*\n🤲 _Jazakallahu khairan katsiran_\n_Semoga menjadi amal jariyah._\n_Aamiin_ 🙏\n\n${baris}\n_Rumah Sedekah Al Furqon_\n_Menebar Berkah, Meraih Ridha_`;
+  window.open(`https://wa.me/${nomor}?text=${encodeURIComponent(pesan)}`, '_blank');
+  const btn = document.getElementById('btn-kirim-wa');
+  btn.innerHTML = '✅ Kwitansi Terkirim!';
+  btn.disabled = true;
+  btn.style.background = '#10B981';
+}
+
+function closeSuccess() {
+  document.getElementById('success-modal').classList.remove('show');
+  kwitansiAktif = null;
+  showScreen('dashboard');
+}
+
+// ========== DONATUR FUNCTIONS ==========
+async function fetchDatabaseDonatur() {
+  try {
+    const res = await fetch(GAS_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ action: "get_donatur" })
+    });
+    const data = await res.json();
+    if (data.status === "ok") allDonatur = data.donatur;
+  } catch (e) {}
+}
+
+function bukaMenuDonatur() {
+  showScreen('screen-donatur');
+  renderDaftarDonatur();
+  const si = document.getElementById('search-list-donatur');
+  if (si) si.value = '';
+}
+
+function renderDaftarDonatur() {
+  const container = document.getElementById('list-donatur-container');
+  const keyword = document.getElementById('search-list-donatur').value.toLowerCase().trim();
+  let filtered = allDonatur;
+  if (keyword) {
+    filtered = allDonatur.filter(d => (d.nama && d.nama.toLowerCase().includes(keyword)) || (d.hp && d.hp.includes(keyword)) || (d.id && d.id.toLowerCase().includes(keyword)));
+  }
+  if (filtered.length === 0) {
+    container.innerHTML = '<div style="text-align:center;padding:40px 20px;color:var(--teks-muda);font-size:14px;">Belum ada data donatur atau tidak ditemukan.</div>';
+    return;
+  }
+  container.innerHTML = filtered.map(d => {
+    let waHtml = '<span style="color:var(--teks-muda)">📞 Tidak ada WA</span>';
+    if (d.hp && d.hp.toString().length >= 9) {
+      let cleanWa = d.hp.toString().replace(/[^0-9]/g, '');
+      if (cleanWa.startsWith('0')) cleanWa = '62' + cleanWa.substring(1);
+      waHtml = `<a href="https://wa.me/${cleanWa}" target="_blank" style="color:#10B981;text-decoration:none;font-weight:800;background:#ECFDF5;padding:2px 8px;border-radius:6px;display:inline-block;">📞 ${d.hp}</a>`;
+    }
+    return `
+      <div style="padding:16px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:16px;">
+        <div style="width:48px;height:48px;border-radius:50%;background:#FEF2F2;color:#DC2626;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:20px;font-family:'Nunito',sans-serif;">${d.nama.charAt(0).toUpperCase()}</div>
+        <div style="flex:1;">
+          <div style="font-weight:700;color:var(--teks);font-size:15px;">${d.nama}</div>
+          <div style="font-size:12px;color:var(--teks-muda);margin-top:6px;font-weight:500;display:flex;align-items:center;gap:8px;"><span>🪪 ${d.id}</span>${waHtml}</div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function toggleFormDonatur() {
+  const form = document.getElementById('form-donatur-baru');
+  form.style.display = form.style.display === 'none' ? 'block' : 'none';
+}
+
+async function simpanDonaturBaru() {
+  const nama = document.getElementById('donatur-nama').value.trim();
+  const wa = document.getElementById('donatur-wa').value.trim();
+  const alamat = document.getElementById('donatur-alamat').value.trim();
+  if (!nama) {
+    showToast('Nama donatur harus diisi');
+    return;
+  }
+  if (!wa) {
+    showToast('No. WhatsApp harus diisi');
+    return;
+  }
+  try {
+    const res = await fetch(GAS_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ action: "tambah_donatur", nama: nama, hp: wa, alamat: alamat })
+    });
+    const data = await res.json();
+    if (data.status === "ok") {
+      showToast('✅ Donatur berhasil ditambahkan!');
+      document.getElementById('donatur-nama').value = '';
+      document.getElementById('donatur-wa').value = '';
+      document.getElementById('donatur-alamat').value = '';
+      document.getElementById('form-donatur-baru').style.display = 'none';
+      fetchDatabaseDonatur();
+      setTimeout(() => renderDaftarDonatur(), 500);
+    } else {
+      showToast('❌ Gagal: ' + (data.message || 'Coba lagi'));
+    }
+  } catch (e) {
+    showToast('Gagal terhubung ke server');
+  }
+}
+
+// ========== DONATUR RUTIN SEARCH ==========
+function cariDonatur() {
+  const keyword = document.getElementById('f-search').value.toLowerCase().trim();
+  const resContainer = document.getElementById('search-result');
+  resContainer.innerHTML = '';
+  if (!keyword) {
+    showToast('Ketik nama atau nomor HP dulu ya!');
+    return;
+  }
+  const results = allDonatur.filter(d => (d.nama && d.nama.toLowerCase().includes(keyword)) || (d.hp && d.hp.includes(keyword)) || (d.id && d.id.toLowerCase().includes(keyword)));
+  if (results.length === 0) {
+    resContainer.innerHTML = '<div style="text-align:center;padding:12px;font-size:12px;color:#DC2626;border:1px dashed #ccc;border-radius:8px;">❌ Data tidak ditemukan</div>';
+    return;
+  }
+  resContainer.innerHTML = results.map(d => `
+    <div onclick="pilihDonatur('${d.id}','${d.nama}','${d.hp}')" style="padding:12px;background:white;border:1px solid #E5E7EB;border-radius:8px;margin-bottom:8px;cursor:pointer;box-shadow:0 2px 4px rgba(0,0,0,0.05);">
+      <div style="font-size:14px;font-weight:700;color:#1F2937;">${d.nama}</div>
+      <div style="font-size:11px;color:#6B7280;margin-top:4px;">🪪 ${d.id} &nbsp;📞 ${d.hp || 'Tidak ada WA'}</div>
+    </div>
+  `).join('');
+}
+
+function pilihDonatur(id, nama, hp) {
+  selectedDonaturData = { id, nama, hp };
+  document.getElementById('search-result').innerHTML = '';
+  document.getElementById('search-container').style.display = 'none';
+  document.getElementById('sd-nama').textContent = nama;
+  document.getElementById('sd-wa').textContent = hp || 'Tidak ada nomor WA';
+  document.getElementById('selected-donatur').style.display = 'block';
+}
+
+function resetSearch() {
+  selectedDonaturData = null;
+  const sd = document.getElementById('selected-donatur');
+  const sc = document.getElementById('search-container');
+  if (sd) sd.style.display = 'none';
+  if (sc) sc.style.display = 'block';
+  if (document.getElementById('f-search')) document.getElementById('f-search').value = '';
+  if (document.getElementById('search-result')) document.getElementById('search-result').innerHTML = '';
+}
+
+// ========== LAPORAN ==========
+function bukaLaporan() {
+  showScreen('screen-laporan');
+  if (currentPetugas) {
+    document.getElementById('laporan-info-petugas').textContent = currentPetugas.nama + ' • ' + currentPetugas.id + (currentPetugas.area ? ' • 📍 ' + currentPetugas.area : '');
+  }
+  setPeriodeCepat(7);
+}
+
+function setPeriodeCepat(jenis) {
+  const now = new Date();
+  let mulai = new Date();
+  if (jenis === 7) mulai.setDate(now.getDate() - 7);
+  else if (jenis === 30) mulai.setDate(now.getDate() - 30);
+  else if (jenis === 'bulan-ini') mulai = new Date(now.getFullYear(), now.getMonth(), 1);
+  document.getElementById('laporan-tgl-mulai').value = formatDateInput(mulai);
+  document.getElementById('laporan-tgl-selesai').value = formatDateInput(now);
+  document.querySelectorAll('#screen-laporan .cf-btn').forEach(b => b.classList.remove('active'));
+  if (jenis === 7) document.querySelector('#screen-laporan .cf-btn:nth-child(1)').classList.add('active');
+  if (jenis === 30) document.querySelector('#screen-laporan .cf-btn:nth-child(2)').classList.add('active');
+  if (jenis === 'bulan-ini') document.querySelector('#screen-laporan .cf-btn:nth-child(3)').classList.add('active');
+  tampilkanLaporan();
+}
+
+function formatDateInput(date) {
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const d = String(date.getDate()).padStart(2, '0');
+  return `${y}-${m}-${d}`;
+}
+
+function formatDateFromInput(inputVal) {
+  if (!inputVal) return '';
+  const parts = inputVal.split('-');
+  return `${parts[2]}/${parts[1]}/${parts[0]}`;
+}
+
+async function tampilkanLaporan() {
+  const tbody = document.getElementById('laporan-tbody');
+  tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:20px;">⏳ Memuat data...</td></tr>';
+  const tglMulai = formatDateFromInput(document.getElementById('laporan-tgl-mulai').value);
+  const tglSelesai = formatDateFromInput(document.getElementById('laporan-tgl-selesai').value);
+  try {
+    const res = await fetch(GAS_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ action: "get_laporan", tgl_mulai: tglMulai, tgl_selesai: tglSelesai, petugas_id: currentPetugas ? currentPetugas.id : "" })
+    });
+    const data = await res.json();
+    if (data.status === "ok") {
+      document.getElementById('lr-total').textContent = 'Rp ' + data.ringkasan.total_donasi.toLocaleString('id-ID');
+      document.getElementById('lr-transaksi').textContent = data.ringkasan.jml_transaksi;
+      document.getElementById('lr-rata').textContent = 'Rp ' + data.ringkasan.rata_rata.toLocaleString('id-ID');
+      document.getElementById('lr-infak').textContent = 'Rp ' + data.ringkasan.infak.toLocaleString('id-ID');
+      document.getElementById('lr-zakat').textContent = 'Rp ' + data.ringkasan.zakat.toLocaleString('id-ID');
+      document.getElementById('lr-wakaf').textContent = 'Rp ' + data.ringkasan.wakaf.toLocaleString('id-ID');
+      if (data.data.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:20px;color:var(--teks-muda);">Tidak ada data di periode ini</td></tr>';
+      } else {
+        tbody.innerHTML = data.data.map((d, i) => `
+          <tr>
+            <td>${i + 1}</td>
+            <td>${d.tanggal}</td>
+            <td style="font-size:10px;color:#DC2626;">${d.trx_id}</td>
+            <td>${d.donatur}</td>
+            <td><span class="jenis-badge ${d.jenis.toLowerCase()}">${d.jenis.toUpperCase()}</span></td>
+            <td style="font-weight:700;">Rp ${d.nominal.toLocaleString('id-ID')}</td>
+            <td>${d.petugas_nama}</td>
+          </tr>
+        `).join('');
+      }
+    } else {
+      tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:20px;color:#DC2626;">Gagal memuat data</td></tr>';
+    }
+  } catch (e) {
+    tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;padding:20px;color:#DC2626;">Error: ${e.message}</td></tr>`;
+  }
+}
+
+function cetakLaporan() {
+  window.print();
+}
+
+function shareLaporanWA() {
+  const total = document.getElementById('lr-total').textContent;
+  const transaksi = document.getElementById('lr-transaksi').textContent;
+  const mulai = document.getElementById('laporan-tgl-mulai').value;
+  const selesai = document.getElementById('laporan-tgl-selesai').value;
+  const pesan = `📊 *LAPORAN DONASI RUMAH SEDEKAH AL FURQON*\n\n📅 Periode: ${mulai} s/d ${selesai}\n👤 Petugas: ${currentPetugas.nama}\n🆔 ID: ${currentPetugas.id}\n\n💰 Total: *${total}*\n📋 Transaksi: *${transaksi}*\n\n✅ _Menebar Berkah, Meraih Ridha_`;
+  window.open(`https://wa.me/?text=${encodeURIComponent(pesan)}`, '_blank');
+}
+
+// ========== PROFIL ==========
+function bukaProfil() {
+  showScreen('screen-profil');
+  if (!currentPetugas) return;
+  document.getElementById('profil-nama').textContent = currentPetugas.nama;
+  document.getElementById('profil-id').textContent = 'ID: ' + currentPetugas.id;
+  document.getElementById('p-id').textContent = currentPetugas.id;
+  document.getElementById('p-nama').textContent = currentPetugas.nama;
+  document.getElementById('p-area').textContent = currentPetugas.area || '-';
+  document.getElementById('p-status').textContent = currentPetugas.status || 'Aktif';
+  const fotoEl = document.getElementById('profil-foto');
+  const inisialEl = document.getElementById('profil-inisial');
+  if (currentPetugas.foto && currentPetugas.foto !== '') {
+    fotoEl.src = currentPetugas.foto;
+    fotoEl.style.display = 'block';
+    inisialEl.style.display = 'none';
+  } else {
+    fotoEl.style.display = 'none';
+    inisialEl.style.display = 'flex';
+    inisialEl.textContent = currentPetugas.nama.charAt(0).toUpperCase();
+  }
+  loadStatistikProfil();
+}
+
+async function loadStatistikProfil() {
+  try {
+    const res = await fetch(GAS_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ action: "get_riwayat", petugas_id: currentPetugas.id })
+    });
+    const data = await res.json();
+    if (data.status === "ok") {
+      document.getElementById('p-total').textContent = 'Rp ' + data.ringkasan.total_donasi.toLocaleString('id-ID');
+      document.getElementById('p-transaksi').textContent = data.ringkasan.jml_transaksi;
+      document.getElementById('p-rata').textContent = 'Rp ' + data.ringkasan.rata_rata.toLocaleString('id-ID');
+    }
+  } catch (e) {}
+  const target = currentPetugas.target || 5000000;
+  if (target > 0) {
+    document.getElementById('profil-target-card').style.display = 'block';
+    document.getElementById('p-target').textContent = 'Rp ' + target.toLocaleString('id-ID');
+    const totalText = document.getElementById('p-total').textContent.replace(/[^0-9]/g, '');
+    const total = parseInt(totalText) || 0;
+    const pct = Math.min(Math.round(total / target * 100), 100);
+    document.getElementById('p-target-bar').style.width = pct + '%';
+    document.getElementById('p-target-pct').textContent = pct + '% Tercapai';
+  }
+}
+
+// ========== RIWAYAT ==========
+function bukaRiwayat() {
+  showScreen('screen-riwayat');
+  if (currentPetugas) {
+    document.getElementById('riwayat-info-petugas').textContent = currentPetugas.nama + ' • ' + currentPetugas.id;
+  }
+  tampilkanRiwayat();
+}
+
+async function tampilkanRiwayat() {
+  const tbody = document.getElementById('riwayat-tbody');
+  tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:20px;">⏳ Memuat data...</td></tr>';
+  try {
+    const res = await fetch(GAS_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ action: "get_riwayat", petugas_id: currentPetugas.id })
+    });
+    const data = await res.json();
+    if (data.status === "ok") {
+      document.getElementById('rw-total').textContent = 'Rp ' + data.ringkasan.total_donasi.toLocaleString('id-ID');
+      document.getElementById('rw-transaksi').textContent = data.ringkasan.jml_transaksi;
+      document.getElementById('rw-rata').textContent = 'Rp ' + data.ringkasan.rata_rata.toLocaleString('id-ID');
+      if (data.data.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:20px;color:var(--teks-muda);">Belum ada donasi tercatat</td></tr>';
+      } else {
+        tbody.innerHTML = data.data.map((d, i) => `
+          <tr>
+            <td>${i + 1}</td>
+            <td>${d.tanggal}</td>
+            <td style="font-size:10px;color:#DC2626;">${d.trx_id}</td>
+            <td>${d.donatur}</td>
+            <td><span class="jenis-badge ${d.jenis.toLowerCase()}">${d.jenis.toUpperCase()}</span></td>
+            <td style="font-weight:700;">Rp ${d.nominal.toLocaleString('id-ID')}</td>
+          </tr>
+        `).join('');
+      }
+    }
+  } catch (e) {
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:20px;color:#DC2626;">Gagal memuat data</td></tr>';
+  }
+}
+</script>
+
+</body>
+</html>

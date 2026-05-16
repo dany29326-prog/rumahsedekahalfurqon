@@ -1,0 +1,24 @@
+{
+  "name": "Rumah Sedekah Al Furqon",
+  "short_name": "RS Al Furqon",
+  "description": "Sistem Donasi & Fundraiser - Amanah, Transparan, Tepat Sasaran",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#FEF2F2",
+  "theme_color": "#DC2626",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://github.com/dany29326-prog/rumahsedekahalfurqon/blob/main/icon.webp?raw=true",
+      "sizes": "192x192",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://github.com/dany29326-prog/rumahsedekahalfurqon/blob/main/icon.webp?raw=true",
+      "sizes": "512x512",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    }
+  ]
+}
